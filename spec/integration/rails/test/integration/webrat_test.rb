@@ -56,6 +56,12 @@ class WebratTest < ActionController::IntegrationTest
     click_link "link_id"
     assert_contain("Webrat Form")
   end
+  
+  test "should click link by href" do
+    visit internal_redirect_path
+    click_link "/"    
+    assert_contain("Webrat Form")
+  end
 
   test "should be able to assert xpath" do
     visit root_path

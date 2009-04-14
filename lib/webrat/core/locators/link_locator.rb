@@ -16,7 +16,8 @@ module Webrat
       def matching_links
         @matching_links ||= link_elements.select do |link_element|
           matches_text?(link_element) ||
-          matches_id?(link_element)
+          matches_id?(link_element) ||
+          matches_href?(link_element)
         end
       end
 
@@ -33,13 +34,21 @@ module Webrat
       end
 
       def matches_id?(link)
-        if @value.is_a?(Regexp)
-          (Webrat::XML.attribute(link, "id") =~ @value) ? true : false
-        else
-          (Webrat::XML.attribute(link, "id") == @value) ? true : false
-        end
+        matches_attribute?(link, "id")
       end
 
+      def matches_href?(link)
+        matches_attribute?(link, "href")
+      end
+      
+      def matches_attribute?(link, attribute)
+        if @value.is_a?(Regexp)
+          (Webrat::XML.attribute(link, attribute) =~ @value) ? true : false
+        else
+          (Webrat::XML.attribute(link, attribute) == @value) ? true : false
+        end
+      end
+      
       def link_elements
         Webrat::XML.xpath_search(@dom, *Link.xpath_search)
       end
