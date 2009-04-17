@@ -248,16 +248,18 @@ module Webrat
     #   innerHTML, with simple &nbsp; handling
     #   title
     #   id
+    #   href
     #
     # innerHTML and title are matchable by text subtring or Regexp
     # id is matchable by full text equality or Regexp
+    # href is matchable by full text equality or Regexp
     #
     # Example:
     #   click_link "Sign up"
     #   click_link "Sign up", :javascript => false
     #   click_link "Sign up", :method => :put
-    def click_link(text_or_title_or_id, options = {})
-      find_link(text_or_title_or_id).click(options)
+    def click_link(text_or_title_or_id_or_href, options = {})
+      find_link(text_or_title_or_id_or_href).click(options)
     end
 
     webrat_deprecate :clicks_link, :click_link

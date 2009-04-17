@@ -67,7 +67,7 @@ module Webrat
 
     end
 
-    def find_link(text_or_title_or_id) #:nodoc:
+    def find_link(text_or_title_or_id_or_href) #:nodoc:
       LinkLocator.new(@session, dom, text_or_title_or_id).locate!
     end
 
