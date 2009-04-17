@@ -62,7 +62,7 @@ module Webrat
       end
 
       def error_message
-        "Could not find link with text or title or id #{@value.inspect}"
+        "Could not find link with text, title, id or href #{@value.inspect}"
       end
 
     end
